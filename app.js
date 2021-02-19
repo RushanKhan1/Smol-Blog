@@ -68,10 +68,6 @@ app.get('/', (req, res) => {
 	    res.render('home', { homeStartingContent, absPosts });
 	}
 	    
-	    //     for(var i = 0; i < absPosts.length; i++) {
-	    // 	absPosts[i].body = absPosts[i].body.slice(0, 100) + '...';
-	    //     }
-	    //     res.render('home', { homeStartingContent, absPosts });
 	
     });
 });    
@@ -100,7 +96,10 @@ app.post('/compose', (req, res) => {
 
 app.get('/posts/:name', (req, res) => {
 
-    const wantedTitle = _.lowerCase(req.params.name);
+    let wantedId = _.lowerCase(req.params.name);
+    wantedId = wantedId.replace(/\s+/g, '');
+    wantedId = wantedId.toString();
+    console.log(wantedId);
 				  
     var postTitle = "Page Not found!";
     var postBody = "No page with that name exists!"
@@ -112,26 +111,23 @@ app.get('/posts/:name', (req, res) => {
 	
     }
 
-    for(var i = 0; i < posts.length; i++) {
-	const postTitle = _.lowerCase(posts[i].title);
-	if((postTitle) === (wantedTitle)) {
-	    postBody = posts[i].body;
-	    // this has the abstracted post
-	    console.log(posts);
-	    var postContent = {
-		
-		postTitle: posts[i].title,
-		postBody: postBody
-		
-	    }
-	    break;
+    Post.find({ _id: wantedId }, (err, docs) => {
+	if(err){
+	    console.log(err);
 	}
-	else if(i == posts.length-1) {
-	    console.log('Not found!')
-	}
-    }
+	else {
+	    console.log("found!")
+	    postContent = {
 
-    res.render('post', { postContent });
+		postTitle: docs[0].title,
+		postBody: docs[0].body
+	    } 
+
+	    console.log(docs)
+	    res.render('post', { postContent });
+	}
+    });
+
     console.log(postContent.postBody);
 })
 

@@ -1,4 +1,8 @@
 
+h1 a{
+    color: black;
+}
+
 html{
     position: relative;
     min-height: 100%;

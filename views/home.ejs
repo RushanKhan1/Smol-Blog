@@ -3,7 +3,7 @@
 <h1>Home</h1>
 <p> <%= homeStartingContent %> </p>
 <% for(var i=0; i<absPosts.length; i++) {%>
-   <h1><%= absPosts[i].title %></h1>
-   <p><%= absPosts[i].body %> <a href="/posts/<%= absPosts[i].title %>">Read More</a></p>
+    <h1><a href="/posts/ <%= absPosts[i]._id%>"><%= absPosts[i].title %> </a></h1>
+   <p><%= absPosts[i].body %> <a href="/posts/<%= absPosts[i]._id %>">Read More</a></p>
 <% } %>
 <%- include("./partials/footer") %>
