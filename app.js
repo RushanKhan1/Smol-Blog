@@ -4,7 +4,32 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require('lodash');
+const mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost:27017/blogDB', {useNewUrlParser: true, useUnifiedTopology: true});
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+    console.log("We are connected!");
+})
+
+const postSchema = new mongoose.Schema({
+   
+    title : String, 
+    body : String 
+    
+});
+
+const Post = mongoose.model("Post", postSchema);
+
+// const samplePost1 = new Post({
+//     title: "Test",
+//     body: "This is a test!"
+// })
+
+// samplePost1.save();
 
 const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
 const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
@@ -22,42 +47,54 @@ let posts = [];
 var absPosts = []; // an array for storing abstracted post bodies.
 
 app.get('/', (req, res) => {
-    console.log(posts)
 
     // This assigns the referrence of the array and not the actual array 
     // absPosts = posts;
 
     // creating a deep copy with lodash
-    absPosts = _.cloneDeep(posts);
+    // absPosts = _.cloneDeep(posts);
 
-
-    for(var i = 0; i < absPosts.length; i++) {
-	absPosts[i].body = absPosts[i].body.slice(0, 100) + '...';
-    }
-    res.render('home', { homeStartingContent, absPosts });
-})
-
+    
+    Post.find({}, (err, docs) => {
+	if(err){
+	    console.log(err);
+	}
+	else {
+	    absPosts = _.cloneDeep(docs);
+	    for(var i = 0; i < absPosts.length; i++) {
+		absPosts[i].body = absPosts[i].body.slice(0, 100) + '...';
+	    }
+		
+	    res.render('home', { homeStartingContent, absPosts });
+	}
+	    
+	    //     for(var i = 0; i < absPosts.length; i++) {
+	    // 	absPosts[i].body = absPosts[i].body.slice(0, 100) + '...';
+	    //     }
+	    //     res.render('home', { homeStartingContent, absPosts });
+	
+    });
+});    
 
 
 app.get('/about', (req, res) => {
     res.render('about', {aboutContent})
-})
+});
 
 app.get('/contact', (req, res) => {
     res.render('contact', {aboutContent})
-})
+});
 
 app.get('/compose', (req, res) => {
     res.render('compose')
-})
+});
 
 app.post('/compose', (req, res) => {
-    const post = {
+    const post = new Post({
 	title: req.body.postTitle,
 	body: req.body.post
-    }
-    posts.push(post);
-    console.log(posts);
+    });
+    post.save();
     res.redirect('/');
 })
 
