@@ -3,6 +3,15 @@ h1 a{
     color: black;
 }
 
+p a{
+    display: inline;
+}
+
+
+button {
+    display: inline;
+}
+
 html{
     position: relative;
     min-height: 100%;
@@ -11,6 +20,28 @@ html{
 .container {
     min-height: 100%;
 }
+
+.absPost {
+}
+
+.dropdown {
+    display: flex;
+}
+
+.dropdown-toggle {
+    position: relative; 
+    bottom: 2px;
+    background: transparent;
+    height: 20px;
+    width: 20px;
+    background-image: url("/images/expand.svg");
+}
+
+
+/*overriding boostrap's default property*/
+/* .show { */
+/*     display: inline!important; */
+/* } */
 
 .container-fluid {
     padding-top: 70px;
@@ -24,6 +55,8 @@ html{
 /* .push { */
     /* height: 100%; */
 /* } */
+
+
 
 .navbar {
     padding-top: 15px;
@@ -39,7 +72,8 @@ html{
 }
 
 .footer-padding {
-	padding-bottom: 60px;
+    padding-top: 50px;
+    padding-bottom: 60px;
 }
 
 .footer {
