@@ -138,6 +138,47 @@ app.get('/posts/:name', (req, res) => {
 })
 
 
+app.get("/edit/:id", (req, res) => {
+
+    let postId = req.params.id;
+
+    Post.find({ _id: postId }, (err, docs) => {
+	if(err){
+	    console.log(err);
+	}
+	else {
+	    console.log("found!")
+
+	    console.log(docs);
+	    res.render("edit", { docs });
+	}
+    });
+
+
+});
+
+
+app.post("/edit", (req, res) => {
+    let postId = req.body.id;
+    let newTitle = req.body.title;
+    let newBody = req.body.body;
+
+    Post.update({_id: postId}, { title: newTitle, body: newBody }, (err, updateWriteOpResult) => {
+	if(err){
+	    console.log(err);
+	}
+	else {
+	    let postContent = {
+		postTitle: newTitle,
+		postBody: newBody
+	    }
+	    
+	    res.render('post', { postContent })
+	    
+	}
+    }); 
+});
+
 let port = process.env.PORT;
 if(port == null || port == ""){
     port = 3000;

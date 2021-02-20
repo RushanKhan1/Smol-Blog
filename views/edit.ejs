@@ -1,0 +1,18 @@
+<%- include("./partials/header") %>
+
+<form action="/edit" method="post">
+
+    <h1><textarea  rows="1" cols="20" name="title"><%=docs[0].title%></textarea></h1>
+    <p><textarea   rows="10" cols="85"  name="body"><%=docs[0].body%></textarea> </p>
+<input type="hidden" name="id"  value="<%=docs[0]._id%>">
+<button class="btn btn-primary" type="submit" name="editBtn" onclick="saveSuccessful()" value="Save">Save</button>
+
+</form>
+
+<script>
+ function saveSuccessful(){
+     alert("Your Article has been updated!");
+ }
+</script>
+
+<%- include("./partials/footer") %>
