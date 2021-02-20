@@ -64,7 +64,37 @@ html{
     /* height: 100%; */
 /* } */
 
+.composeBtn {
+    position: fixed;
+    /* right: 9%; */
+    right: 11%;
+    bottom: 12%;
+    font-weight: 500;
+    height: 48px;
+    width: 130px;
+    border-radius: 24px;
+    background-color: #fff;
+    border-width: 0.11px;
+    border-style: outset;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: .25px;
+    color: black;
+}
 
+.composeBtn:hover {
+    background-color: #fafafb; 
+}
+
+#composeLink:hover {
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+.composeImg{
+    position: relative; 
+    right: 5px;
+}
 
 .navbar {
     padding-top: 15px;
@@ -78,6 +108,7 @@ html{
 .navbar-nav  li a:hover {
     color: #1abc9c !important;
 }
+
 
 .footer-padding {
     padding-top: 50px;
