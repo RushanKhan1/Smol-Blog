@@ -70,10 +70,10 @@ app.get('/', (req, res) => {
 	    for(var i = 0; i < absPosts.length; i++) {
 		absPosts[i].body = absPosts[i].body.slice(0, 100) + '...';
 	    }
-		
+	    
 	    res.render('home', { homeStartingContent, absPosts });
 	}
-	    
+	
 	
     });
 });    
@@ -178,6 +178,22 @@ app.post("/edit", (req, res) => {
 	}
     }); 
 });
+
+
+app.get("/delete/:id", (req, res) => {
+    let postId = req.params.id;
+    Post.deleteOne({_id: postId}, (err) => {
+	if(err){
+	    console.log(err);
+	}
+	else {
+	    console.log("Deletion successful!")
+	    res.redirect("/");
+	}
+    });
+
+});
+
 
 let port = process.env.PORT;
 if(port == null || port == ""){
