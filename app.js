@@ -7,12 +7,11 @@ const ejs = require("ejs");
 const _ = require('lodash');
 const mongoose = require('mongoose');
 const fs = require("fs");
+require('dotenv').config();
 
 
 
-
-mongoose.connect('mongodb://localhost:27017/blogDB', {useNewUrlParser: true, useUnifiedTopology: true});
-
+mongoose.connect("mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@cluster0.2zug1.mongodb.net/todolistDB?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
