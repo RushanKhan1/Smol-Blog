@@ -15,6 +15,13 @@ p a{
     display: inline;
 }
 
+.post{
+    font-size: 18px;
+}
+
+.postTitle {
+    padding-top: 0;
+}
 
 button {
     display: inline;
@@ -45,6 +52,10 @@ html{
     background-image: url("/images/expand.svg");
 }
 
+#deleteBtn {
+    /* color: #e9453b; */
+    color: #e33026;
+}
 
 /*overriding boostrap's default property*/
 /* .show { */

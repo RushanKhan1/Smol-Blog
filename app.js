@@ -10,7 +10,6 @@ const fs = require("fs");
 
 
 
-// console.log(fs.readFileSync(__dirname + "/"))
 
 mongoose.connect('mongodb://localhost:27017/blogDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -92,6 +91,7 @@ app.get('/compose', (req, res) => {
 });
 
 app.post('/compose', (req, res) => {
+
     const post = new Post({
 	title: req.body.postTitle,
 	body: req.body.post
