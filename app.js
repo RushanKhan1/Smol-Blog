@@ -11,7 +11,7 @@ require('dotenv').config();
 
 
 
-mongoose.connect("mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@cluster0.2zug1.mongodb.net/todolistDB?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@cluster0.2zug1.mongodb.net/SmolBlogDB?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 
 const postSchema = new mongoose.Schema({
    
