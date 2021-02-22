@@ -1,11 +1,12 @@
 <h1 align="center">Smol-Blog</h1>
-<p align="center"> A mini-blog/daily journal to keep track of whatever's on your mind. Made using Node.js, Express, MongoDB/Mongoose, and bootstrap with EJS as the templating engine.
+<p align="center"> A mini-blog/daily journal to keep track of whatever's on your mind. Made using Node.js, Express, MongoDB/Mongoose, and bootstrap with EJS as the templating engine. </p>
 
+<br>
 <br>
 
 <img align="center" src="/images/preview.png">
 
-
+<br>
 <br>
 
 <h2>Features</h2>
