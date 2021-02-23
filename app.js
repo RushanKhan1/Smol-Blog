@@ -6,7 +6,6 @@ const path = require("path");
 const ejs = require("ejs");
 const _ = require('lodash');
 const mongoose = require('mongoose');
-const fs = require("fs");
 require('dotenv').config();
 
 
